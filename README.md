@@ -362,5 +362,119 @@ IMPORTANT: If the MCP proxy does not start automatically, run the following comm
 
 mcp-remote https://api.browser-use.com/mcp --header="X-Browser-Use-API-Key:YOUR_API_KEY"
 
+Actual MCP
+{
+  "mcpServers": {
+    "playwright-mcp": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\Public\\mcp-playwright\\server.js"
+      ]
+    }
+  },
+  "preferences": {
+    "coworkWebSearchEnabled": true,
+    "sidebarMode": "chat",
+    "coworkScheduledTasksEnabled": false
+  }
+}
 
+Guide - browser use
 
+1. Install Python
+
+Install Python 3.11+
+Verify:
+python --version
+
+2. Install uv (Python package manager)
+pip install uv
+Verify:
+uv --version
+
+3. Clone the browser-use repository
+git clone https://github.com/browser-use/browser-use
+cd browser-use
+
+4. Install dependencies
+uv sync --all-extras --dev
+This installs:
+Playwright
+AI dependencies
+browser automation stack
+
+5. Install the browser
+uvx browser-use install
+This installs Chromium for automation.
+
+6. Create environment file
+Create:
+.env
+Add your API key:
+BROWSER_USE_API_KEY=your_key_here
+You can get a key from:
+https://cloud.browser-use.com
+Running browser-use locally
+Test browser automation:
+
+uv run examples/simple.py
+
+If successful:
+Chromium opens
+The AI agent performs a task.
+
+Open Claude config:
+
+C:\Users\<USER>\AppData\Roaming\Claude\claude_desktop_config.json
+
+Example configuration:
+
+{
+  "mcpServers": {
+    "playwright-mcp": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp"
+      ]
+    },
+    "browser-use": {
+      "command": "C:\\Users\\Lenovo\\AppData\\Local\\Programs\\Python\\Python312\\Scripts\\uvx.exe",
+      "args": [
+        "browser-use",
+        "--mcp"
+      ],
+      "cwd": "C:\\Users\\Public\\browser-use\\browser-use",
+      "env": {
+        "BROWSER_USE_API_KEY": "YOUR KEY"
+      }
+    }
+  },
+  "preferences": {
+    "coworkWebSearchEnabled": true,
+    "sidebarMode": "chat",
+    "coworkScheduledTasksEnabled": false
+  }
+}
+
+Verify MCP Servers
+
+Open:
+
+Settings → Developer → Local MCP Servers
+
+Expected:
+
+browser-use    running
+playwright-mcp running
+Testing browser-use
+
+Example prompt:
+
+Use browser-use to search Google for "OpenAI" and tell me the first result.
+Debugging
+
+If MCP fails:
+
+Check logs in Claude:
+
+Settings → Developer → View Logs
