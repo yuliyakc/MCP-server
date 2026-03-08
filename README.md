@@ -379,7 +379,7 @@ Actual MCP
   }
 }
 
-Guide - browser use
+Guide - browser use local version
 
 1. Install Python
 
